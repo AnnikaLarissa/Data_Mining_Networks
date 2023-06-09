@@ -20,12 +20,15 @@ To start a link prediction task, it is essential to create a node embedding. For
 
 ### Splitter
 
-1. .....
+1. The Splitter implementation uses PyTorch in a similar manner as https://github.com/benedekrozemberczki/Splitter. Make sure to have the required packages (and versions) installed before running the code.
+2. Put the input data in `node_embeddings\splitter\input`
+3. Potentially change the number of dimensions of the embedding, or other parameters such as number of walks in `node_embeddings\splitter\param_parser.py`
+4. Run `python main.py` in your terminal. The embeddings appear in `node_embeddings\splitter\output`
 
 ## Link Prediction
 ### Logistic Regression
 
-1. .....
+The `link_prediction_log_regression` takes the partial embeddings in `embeddings_parial_data` and `\splitter\output`. It splits the data into train (80%) and test (20%) sets and calculates the probability of the existence of an edge between nodes. This is then used to calculate the AUC-ROC, AUC-PR, accuracy and F1 score.
 
 ### Cosine Similarity
 The `link_prediction_cosine_sim` notebook takes the partial embeddings in the `embeddings_parial_data` folder and iteratively predicts links if the cosine similarity >= 97.5%. Then, it compares it to the ground truth and outputs the confusion matrix, accuracy and precision for each of the dimensions.
